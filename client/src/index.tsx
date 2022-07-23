@@ -3,7 +3,6 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import App from "./App";
-import Prefs from "./prefs/App";
 
 const content = <App />;
 
@@ -13,7 +12,6 @@ const app = (
       <Routes>
         <Route path="/" element={content} />
         <Route path="index.html" element={content} />
-        <Route path="prefs" element={<Prefs />} />{" "}
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

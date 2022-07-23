@@ -47,10 +47,10 @@ jobs:
           if ! git switch release; then git switch --orphan release; fi
       - run: |
           rm -rf relay
-          mkdir -p relay/yorick
+          mkdir -p relay/ascension-setup-script
           cp server-files/KoLmafia/relay/* relay/
-          cp client-files/KoLmafia/relay/relay_YORICK.js relay/
-          cp -R client-files/build/* relay/yorick/
+          cp client-files/KoLmafia/relay/relay_ascension-setup-script.js relay/
+          cp -R client-files/build/* relay/ascension-setup-script/
       - run: |
           git add relay/
           {

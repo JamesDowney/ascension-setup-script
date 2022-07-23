@@ -1,5 +1,5 @@
 {
-  "name": "yorick",
+  "name": "ascension-setup-script",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -67,5 +67,5 @@
     ]
   },
   "proxy": "http://127.0.0.1:60080",
-  "homepage": "/yorick"
+  "homepage": "/ascension-setup-script"
 }

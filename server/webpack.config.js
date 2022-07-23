@@ -5,7 +5,7 @@ const path = require("path");
 
 const config = {
   entry: {
-    yorick: "./src/index.ts",
+    "ascension-setup-script": "./src/index.ts",
   },
   output: {
     path: path.resolve(__dirname, "KoLmafia", "relay"),

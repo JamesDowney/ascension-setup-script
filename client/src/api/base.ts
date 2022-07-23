@@ -9,7 +9,7 @@ type ApiResponse = {
 };
 
 export function apiCall(request: ApiRequest): Promise<ApiResponse> {
-  return fetch("/yorick.js?relay=true", {
+  return fetch("/ascension-setup-script.js?relay=true", {
     method: "post",
     body: new URLSearchParams({ body: JSON.stringify(request) }),
     headers: {
