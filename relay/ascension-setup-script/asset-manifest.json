@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/ascension-setup-script/static/css/main.e6c13ad2.css",
+    "main.js": "/ascension-setup-script/static/js/main.0d8acd2d.js",
+    "index.html": "/ascension-setup-script/index.html",
+    "main.e6c13ad2.css.map": "/ascension-setup-script/static/css/main.e6c13ad2.css.map",
+    "main.0d8acd2d.js.map": "/ascension-setup-script/static/js/main.0d8acd2d.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e6c13ad2.css",
+    "static/js/main.0d8acd2d.js"
+  ]
+}

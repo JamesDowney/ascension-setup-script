@@ -5,8 +5,7 @@ function main() {
     [
       "<html><body>",
       "<script>",
-      'window.parent.frames.chatpane.location.href = "/yorick/index.html";',
-      'window.parent.frames.mainpane.location.href = "/main.php";',
+      'window.parent.frames.mainpane.location.href = "/ascension-setup-script/index.html";',
       "</script>",
       "</body></html>",
       "",
