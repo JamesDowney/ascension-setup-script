@@ -1,9 +1,18 @@
-import { ChakraProvider, Flex, Heading } from "@chakra-ui/react";
+import {
+  ChakraProvider,
+  extendTheme,
+  Flex,
+  Heading,
+  HStack,
+} from "@chakra-ui/react";
+import Selectors from "./sections/Selectors";
+
+const theme = extendTheme({});
 
 const Layout = () => {
   return (
     <Flex direction="column" align="stretch" fontSize="sm">
-      <Heading as="h1" size="xl" alignSelf="center">
+      <Heading as="h1" size="xl" marginTop={4} marginLeft={4}>
         Ascension Setup Script
       </Heading>
     </Flex>
@@ -12,8 +21,11 @@ const Layout = () => {
 
 function App() {
   return (
-    <ChakraProvider>
+    <ChakraProvider theme={theme}>
       <Layout />
+      <HStack>
+        <Selectors />
+      </HStack>
     </ChakraProvider>
   );
 }
