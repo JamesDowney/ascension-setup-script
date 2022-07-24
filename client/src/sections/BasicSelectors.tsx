@@ -1,6 +1,6 @@
 import { Paths } from "libram";
 import React, { useState } from "react";
-import { Select, VStack } from "@chakra-ui/react";
+import { Heading, Select } from "@chakra-ui/react";
 
 const paths = Object.values(Paths);
 const moonsigns = [
@@ -34,7 +34,8 @@ const classNumbers = new Map<string, number>([
   ["Vampyre", 24],
   ["Zombie Master", 12],
 ]);
-const Selectors = () => {
+
+const BasicSelectors = () => {
   const [selectedPath = "0", setSelectedPath] = useState<string>();
   const [selectedClass = "1", setSelectedClass] = useState<string>();
   const [selectedSign = "1", setSelectedSign] = useState<string>();
@@ -58,7 +59,10 @@ const Selectors = () => {
   };
 
   return (
-    <VStack width="fit-content" marginLeft={4} marginTop={4}>
+    <>
+      <Heading size="md" alignSelf={"flex-start"}>
+        Basic Options:
+      </Heading>
       <Select onChange={selectPath} value={selectedPath}>
         {paths.map((path) => {
           return (
@@ -95,8 +99,8 @@ const Selectors = () => {
           );
         })}
       </Select>
-    </VStack>
+    </>
   );
 };
 
-export default Selectors;
+export default BasicSelectors;
