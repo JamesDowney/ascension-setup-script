@@ -14,26 +14,45 @@ const moonsigns = [
   [8, "The Blender"],
   [9, "The Packrat"],
 ];
-
+const classNumbers = new Map<string, number>([
+  ["Accordion Thief", 6],
+  ["Avatar of Boris", 11],
+  ["Avatar of Jarlsberg", 14],
+  ["Avatar of Sneaky Pete", 15],
+  ["Beanslinger", 19],
+  ["Cow Puncher", 18],
+  ["Disco Bandit", 5],
+  ["Ed the Undying", 17],
+  ["Gelatinous Noob", 23],
+  ["Grey Goo", 27],
+  ["Pastamancer", 3],
+  ["Plumber", 25],
+  ["Sauceror", 4],
+  ["Seal Clubber", 1],
+  ["Snake Oiler", 20],
+  ["Turtle Tamer", 2],
+  ["Vampyre", 24],
+  ["Zombie Master", 12],
+]);
 const Selectors = () => {
-  const [selectedPath = 0, setSelectedPath] = useState<number>();
-  const [selectedClass = 1, setSelectedClass] = useState<number>();
-  const [selectedSign = 1, setSelectedSign] = useState<number>();
+  const [selectedPath = "0", setSelectedPath] = useState<string>();
+  const [selectedClass = "1", setSelectedClass] = useState<string>();
+  const [selectedSign = "1", setSelectedSign] = useState<string>();
 
   const selectPath = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const value = parseInt(event.target.value);
+    const value = event.target.value;
     setSelectedPath(value);
     event.preventDefault();
   };
 
   const selectClass = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const value = parseInt(event.target.value);
+    const value = event.target.value;
     setSelectedClass(value);
     event.preventDefault();
   };
 
   const selectSign = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const value = parseInt(event.target.value);
+    const value = event.target.value;
     setSelectedSign(value);
     event.preventDefault();
   };
@@ -43,7 +62,7 @@ const Selectors = () => {
       <Select onChange={selectPath} value={selectedPath}>
         {paths.map((path) => {
           return (
-            <option value={path.id.toString()} key={path.id}>
+            <option value={path.id.toString()} key={path.id.toString()}>
               {path.name}
             </option>
           );
@@ -51,12 +70,16 @@ const Selectors = () => {
       </Select>
       <Select onChange={selectClass} value={selectedClass}>
         {paths
-          .find((path) => path.id === selectedPath)
+          .find((path) => path.id === parseInt(selectedPath))
           ?.classes.map((availableClass) => {
             return (
               <option
-                value={availableClass.identifierNumber}
-                key={availableClass.identifierNumber}
+                value={classNumbers
+                  .get(availableClass.identifierString)
+                  ?.toString()}
+                key={classNumbers
+                  .get(availableClass.identifierString)
+                  ?.toString()}
               >
                 {availableClass.identifierString}
               </option>
@@ -66,7 +89,7 @@ const Selectors = () => {
       <Select onChange={selectSign} value={selectedSign}>
         {moonsigns.map((sign) => {
           return (
-            <option value={sign[0]} key={sign[0]}>
+            <option value={sign[0].toString()} key={sign[0].toString()}>
               {sign[1]}
             </option>
           );
