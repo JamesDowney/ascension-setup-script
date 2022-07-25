@@ -16,7 +16,6 @@ const PathSelector: React.FC<Props> = ({ lifestyle, parentCallback }) => {
   const selectPath = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const value = paths.find((path) => path.name === event.target.value);
     setSelectedPath(value);
-    event.preventDefault();
     parentCallback?.(value);
   };
 

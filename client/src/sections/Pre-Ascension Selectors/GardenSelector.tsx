@@ -1,10 +1,10 @@
 import { Item, myGardenType } from "kolmafia";
-import { $item, have } from "libram";
+import { $item, have, Path } from "libram";
 import { ChangeEvent, useState } from "react";
 import { Box, Select } from "@chakra-ui/react";
 import Line from "../../components/Line";
 
-const gardens = new Map<string, Item>([
+export const gardens = new Map<string, Item>([
   ["pumpkin", $item`packet of pumpkin seeds`],
   ["peppermint", $item`Peppermint Pip Packet`],
   ["skeleton", $item`packet of dragon's teeth`],
@@ -14,18 +14,26 @@ const gardens = new Map<string, Item>([
   ["grass", $item`packet of tall grass seeds`],
   ["mushroom", $item`packet of mushroom spores`],
 ]);
+
 const availableGardens = Array.from(gardens.values()).filter((garden) =>
   have(garden)
 );
+
 const myGarden = gardens.get(myGardenType()) ?? $item`none`;
-const GardenSelector = () => {
+
+interface Props {
+  path?: Path;
+  parentCallback?: (newType: string | undefined) => void;
+}
+
+const GardenSelector: React.FC<Props> = ({ parentCallback }) => {
   const [selectedGarden = myGarden.identifierString, setSelectedGarden] =
     useState<string>();
 
   const selectGarden = (event: ChangeEvent<HTMLSelectElement>) => {
     const value = event.target.value;
     setSelectedGarden(value);
-    event.preventDefault();
+    parentCallback?.(value);
   };
 
   return (

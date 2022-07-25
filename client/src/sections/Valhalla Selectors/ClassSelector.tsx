@@ -16,7 +16,6 @@ const ClassSelector: React.FC<Props> = ({ path, parentCallback }) => {
   const selectClass = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const value = $class`${event.target.value}`;
     setSelectedClass(value);
-    event.preventDefault();
     parentCallback?.(value);
   };
 

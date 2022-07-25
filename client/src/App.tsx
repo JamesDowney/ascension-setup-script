@@ -1,10 +1,4 @@
-import {
-  ChakraProvider,
-  extendTheme,
-  Flex,
-  Heading,
-  VStack,
-} from "@chakra-ui/react";
+import { ChakraProvider, extendTheme, Flex, Heading } from "@chakra-ui/react";
 import AscensionConfiguration from "./sections/AscensionConfiguration";
 
 const theme = extendTheme({});
@@ -19,15 +13,13 @@ const Layout = () => {
   );
 };
 
-function App() {
+const App = () => {
   return (
     <ChakraProvider theme={theme}>
       <Layout />
-      <VStack width="fit-content" marginLeft={4} marginTop={4}>
-        <AscensionConfiguration />
-      </VStack>
+      <AscensionConfiguration />
     </ChakraProvider>
   );
-}
+};
 
 export default App;

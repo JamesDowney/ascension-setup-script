@@ -1,5 +1,5 @@
-import { eudora, Item } from "kolmafia";
-import { $item, have } from "libram";
+import { Item, eudoraItem } from "kolmafia";
+import { $item, have, Path } from "libram";
 import { ChangeEvent, useState } from "react";
 import { Box, Select } from "@chakra-ui/react";
 import Line from "../../components/Line";
@@ -17,16 +17,20 @@ const eudoras = new Map<string, Item>([
 const availableEudoras = Array.from(eudoras.values()).filter((correspondence) =>
   have(correspondence)
 );
-const myEudora = eudoras.get(eudora()) ?? $item`none`;
+const myEudora = eudoraItem();
 
-const EudoraSelector = () => {
-  const [selectedEudora = myEudora.identifierString, setSelectedEudora] =
-    useState<string>();
+interface Props {
+  path?: Path;
+  parentCallback?: (newType: Item | undefined) => void;
+}
+
+const EudoraSelector: React.FC<Props> = ({ parentCallback }) => {
+  const [selectedEudora = myEudora, setSelectedEudora] = useState<Item>();
 
   const selectEudora = (event: ChangeEvent<HTMLSelectElement>) => {
-    const value = event.target.value;
+    const value = $item`${event.target.value}`;
     setSelectedEudora(value);
-    event.preventDefault();
+    parentCallback?.(value);
   };
 
   return (
@@ -39,11 +43,12 @@ const EudoraSelector = () => {
       <Select
         disabled={availableEudoras.length === 0}
         onChange={selectEudora}
-        value={selectedEudora}
+        value={selectedEudora.identifierString}
       >
         <option
           value={myEudora.identifierString}
           key={myEudora.identifierString}
+          selected
         >
           {myEudora.identifierString}
         </option>

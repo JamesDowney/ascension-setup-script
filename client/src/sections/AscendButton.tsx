@@ -9,33 +9,40 @@ import {
   AlertDialogHeader,
   AlertDialogOverlay,
   Button,
-  ButtonProps,
   useDisclosure,
 } from "@chakra-ui/react";
 
-interface AscendButtonProps extends ButtonProps {
-  path: Path;
-  playerClass: Class;
-  lifestyle: Lifestyle;
-  moonsign: MoonSign;
-  astraldeli?: Item;
-  astralpet?: Item;
-  // workshed?: string;
-  // garden?: string;
-  // eudora?: string;
-  // chateau?: [string?, string?, string?];
+interface Props {
+  ascension: {
+    lifestyle: Lifestyle;
+    path: Path;
+    playerClass: Class;
+    moonsign: MoonSign;
+    astralDeliItem: Item;
+    astralPetItem: Item;
+  };
+  ascensionPrep: {
+    workshed: string;
+    garden: string;
+    eudora: string;
+  };
 }
 
-const AscendButton: React.FC<AscendButtonProps> = ({
-  path,
-  playerClass,
-  lifestyle,
-  moonsign,
-  astraldeli,
-  astralpet,
-}) => {
+const AscendButton: React.FC<Props> = ({ ascension }) => {
   const ascendButton = () => {
-    ascend(path, playerClass, lifestyle, moonsign, astraldeli, astralpet);
+    // prepareAscension({
+    //   workshed: ascensionPrep.workshed,
+    //   garden: ascensionPrep.garden,
+    //   eudora: ascensionPrep.eudora,
+    // });
+    ascend(
+      ascension.path,
+      ascension.playerClass,
+      ascension.lifestyle,
+      ascension.moonsign,
+      ascension.astralDeliItem,
+      ascension.astralPetItem
+    );
   };
 
   const { isOpen, onOpen, onClose } = useDisclosure();

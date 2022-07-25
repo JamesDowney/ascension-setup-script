@@ -19,7 +19,6 @@ const LifestyleSelector: React.FC<Props> = ({ parentCallback }) => {
         ? Lifestyle.normal
         : Lifestyle.hardcore;
     setSelectedLifestyle(value);
-    event.preventDefault();
     parentCallback?.(value);
   };
 

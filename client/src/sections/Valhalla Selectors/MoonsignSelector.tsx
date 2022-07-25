@@ -25,7 +25,6 @@ const MoonsignSelector: React.FC<Props> = ({ parentCallback }) => {
   const selectSign = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const value = parseInt(event.target.value);
     setSelectedSign(value);
-    event.preventDefault();
     parentCallback?.(value);
   };
   return (
