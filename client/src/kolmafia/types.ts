@@ -11,11 +11,13 @@ type ValidIdentifier<T extends boolean> = T extends true
 
 abstract class MafiaClass<T extends PlaceholderTypes> {
   static readonly staticType: PlaceholderTypes;
+  readonly primestat: Stat;
   readonly objectType: T;
   readonly identifierString: string;
   readonly identifierNumber: HasNumber<T> extends true ? number : undefined;
 
   constructor(values: MafiaClass<T>) {
+    this.primestat = values.primestat;
     this.objectType = values.objectType;
     this.identifierString = values.identifierString;
     this.identifierNumber = values.identifierNumber;
@@ -689,6 +691,84 @@ export class Vykea extends MafiaClass<"Vykea"> {
    * Attack element */
   readonly attackElement!: Element;
 }
+export type MoonSign =
+  | number
+  | "mongoose"
+  | "wallaby"
+  | "vole"
+  | "platypus"
+  | "opossum"
+  | "marmot"
+  | "wombat"
+  | "blender"
+  | "packrat"
+  | "degrassi"
+  | "degrassi knoll"
+  | "friendly degrassi knoll"
+  | "knoll"
+  | "canada"
+  | "canadia"
+  | "little canadia"
+  | "gnomads"
+  | "gnomish"
+  | "gnomish gnomads camp";
+const worksheds = [
+  "warbear LP-ROM burner",
+  "warbear jackhammer drill press",
+  "warbear induction oven",
+  "warbear high-efficiency still",
+  "warbear chemistry lab",
+  "warbear auto-anvil",
+  "spinning wheel",
+  "snow machine",
+  "Little Geneticist DNA-Splicing Lab",
+  "portable Mayo Clinic",
+  "Asdon Martin keyfob",
+  "diabolic pizza cube",
+  "cold medicine cabinet",
+] as const;
+export type Workshed = typeof worksheds[number];
+
+const gardens = [
+  "packet of pumpkin seeds",
+  "Peppermint Pip Packet",
+  "packet of dragon's teeth",
+  "packet of beer seeds",
+  "packet of winter seeds",
+  "packet of thanksgarden seeds",
+  "packet of tall grass seeds",
+  "packet of mushroom spores",
+] as const;
+export type Garden = typeof gardens[number];
+
+const eudorae = [
+  "My Own Pen Pal kit",
+  "GameInformPowerDailyPro subscription card",
+  "Xi Receiver Unit",
+  "New-You Club Membership Form",
+  "Our Daily Candles™ order form",
+] as const;
+export type Eudora = typeof eudorae[number];
+
+const desks = [
+  "fancy stationery set",
+  "Swiss piggy bank",
+  "continental juice bar",
+] as const;
+const ceilings = [
+  "antler chandelier",
+  "ceiling fan",
+  "artificial skylight",
+] as const;
+const nightstands = [
+  "foreign language tapes",
+  "bowl of potpourri",
+  "electric muscle stimulator",
+] as const;
+
+export type Desk = typeof desks[number];
+export type Ceiling = typeof ceilings[number];
+export type Nightstand = typeof nightstands[number];
 
 export const globalTypes = {
   Bounty,

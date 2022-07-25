@@ -1,15 +1,11 @@
 import {
-  Center,
   ChakraProvider,
   extendTheme,
   Flex,
   Heading,
-  HStack,
   VStack,
 } from "@chakra-ui/react";
-import AscendButton from "./sections/AscendButton";
-import BasicSelectors from "./sections/BasicSelectors";
-import DetailedSelectors from "./sections/DetailedSelectors";
+import AscensionConfiguration from "./sections/AscensionConfiguration";
 
 const theme = extendTheme({});
 
@@ -27,15 +23,9 @@ function App() {
   return (
     <ChakraProvider theme={theme}>
       <Layout />
-      <HStack>
-        <VStack width="fit-content" marginLeft={4} marginTop={4}>
-          <BasicSelectors />
-          <DetailedSelectors />
-        </VStack>
-      </HStack>
-      <Center>
-        <AscendButton />
-      </Center>
+      <VStack width="fit-content" marginLeft={4} marginTop={4}>
+        <AscensionConfiguration />
+      </VStack>
     </ChakraProvider>
   );
 }
