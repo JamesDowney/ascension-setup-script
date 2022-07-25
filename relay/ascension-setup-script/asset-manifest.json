@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/ascension-setup-script/static/css/main.e6c13ad2.css",
-    "main.js": "/ascension-setup-script/static/js/main.2aecdea3.js",
+    "main.js": "/ascension-setup-script/static/js/main.a221da97.js",
     "index.html": "/ascension-setup-script/index.html",
     "main.e6c13ad2.css.map": "/ascension-setup-script/static/css/main.e6c13ad2.css.map",
-    "main.2aecdea3.js.map": "/ascension-setup-script/static/js/main.2aecdea3.js.map"
+    "main.a221da97.js.map": "/ascension-setup-script/static/js/main.a221da97.js.map"
   },
   "entrypoints": [
     "static/css/main.e6c13ad2.css",
-    "static/js/main.2aecdea3.js"
+    "static/js/main.a221da97.js"
   ]
 }
