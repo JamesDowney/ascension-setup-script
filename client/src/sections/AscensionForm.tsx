@@ -3,6 +3,7 @@ import { useState } from "react";
 import { FormControl, FormLabel, HStack } from "@chakra-ui/react";
 import Selector from "../components/Selector";
 import AscendButton from "./AscendButton";
+import SeedInfo from "./SeedInfo";
 
 export interface AscensionData {
   lifestyle: string;
@@ -122,6 +123,7 @@ const AscensionForm = () => {
             optionData={petItems}
           />
         </FormControl>
+        <SeedInfo />
       </HStack>
       <AscendButton ascension={selectedAscensionData} />
     </>
