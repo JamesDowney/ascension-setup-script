@@ -1,27 +1,34 @@
-import { useState } from "react";
-import { Box, Select } from "@chakra-ui/react";
+import { Box, Select, SelectProps } from "@chakra-ui/react";
 import Line from "./Line";
 
-interface Props {
+interface Props extends SelectProps {
   header: string;
-  dataToParent?: any;
-  dataFromParent?: (newType: any) => void;
+  optionData: string[];
+  disabled?: boolean;
 }
 
-const Selector: React.FC<Props> = ({ header, dataToParent }) => {
-  const [selectedItem, setSelectedItem] = useState<any>();
-
-  const selectItem = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const value = event.target.value;
-    setSelectedItem(value);
-    event.preventDefault();
-    dataToParent?.(value);
-  };
+const Selector: React.FC<Props> = ({
+  header,
+  name,
+  value,
+  onChange,
+  children,
+  optionData,
+  disabled,
+}) => {
+  const options = optionData.map((option) => (
+    <option value={option} key={option}>
+      {option}
+    </option>
+  ));
 
   return (
-    <Box alignSelf="stretch" alignContent="flex-start">
+    <Box alignSelf="stretch" alignContent="flex-start" marginLeft={4}>
       <Line>{header}:</Line>
-      <Select onChange={selectItem} value={selectedItem} />
+      <Select onChange={onChange} name={name} value={value} disabled={disabled}>
+        {children}
+        {options}
+      </Select>
     </Box>
   );
 };

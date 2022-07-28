@@ -1,5 +1,5 @@
-import { Class, Item, MoonSign } from "kolmafia";
-import { ascend, Lifestyle, Path } from "libram";
+import { MoonSign } from "kolmafia";
+import { $class, $item, ascend, Lifestyle, Paths } from "libram";
 import { useRef } from "react";
 import {
   AlertDialog,
@@ -9,39 +9,47 @@ import {
   AlertDialogHeader,
   AlertDialogOverlay,
   Button,
+  Center,
   useDisclosure,
 } from "@chakra-ui/react";
+import { AscensionData } from "./AscensionForm";
 
 interface Props {
-  ascension: {
-    lifestyle: Lifestyle;
-    path: Path;
-    playerClass: Class;
-    moonsign: MoonSign;
-    astralDeliItem: Item;
-    astralPetItem: Item;
-  };
-  ascensionPrep: {
-    workshed: string;
-    garden: string;
-    eudora: string;
-  };
+  ascension: AscensionData;
+  // ascensionPrep: {
+  //   workshed: string;
+  //   garden: string;
+  //   eudora: string;
+  // };
 }
+const lifestyles = new Map<string, Lifestyle>([
+  ["Casual", Lifestyle.casual],
+  ["Normal", Lifestyle.normal],
+  ["Hardcore", Lifestyle.hardcore],
+]);
+const moonsigns = new Map<string, MoonSign>([
+  ["Mongoose", 1],
+  ["Wallaby", 2],
+  ["Vole", 3],
+  ["Platypus", 4],
+  ["Opossum", 5],
+  ["Marmot", 6],
+  ["Wombat", 7],
+  ["Blender", 8],
+  ["Packrat", 9],
+]);
 
 const AscendButton: React.FC<Props> = ({ ascension }) => {
   const ascendButton = () => {
-    // prepareAscension({
-    //   workshed: ascensionPrep.workshed,
-    //   garden: ascensionPrep.garden,
-    //   eudora: ascensionPrep.eudora,
-    // });
     ascend(
-      ascension.path,
-      ascension.playerClass,
-      ascension.lifestyle,
-      ascension.moonsign,
-      ascension.astralDeliItem,
-      ascension.astralPetItem
+      Object.values(Paths).find((path) => path.name === ascension.path)!,
+      $class`${ascension.playerClass}`,
+      lifestyles.get(ascension.lifestyle)!,
+      moonsigns.get(ascension.moonsign)!,
+      ascension.astralDeli !== "none"
+        ? $item`${ascension.astralDeli}`
+        : undefined,
+      ascension.astralPet !== "none" ? $item`${ascension.astralPet}` : undefined
     );
   };
 
@@ -49,7 +57,7 @@ const AscendButton: React.FC<Props> = ({ ascension }) => {
   const cancelRef = useRef();
 
   return (
-    <>
+    <Center>
       <Button position="fixed" bottom={0} onClick={onOpen}>
         Ascend With This Setup
       </Button>
@@ -77,7 +85,7 @@ const AscendButton: React.FC<Props> = ({ ascension }) => {
           </AlertDialogContent>
         </AlertDialogOverlay>
       </AlertDialog>
-    </>
+    </Center>
   );
 };
 

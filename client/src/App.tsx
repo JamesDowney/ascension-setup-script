@@ -1,5 +1,5 @@
 import { ChakraProvider, extendTheme, Flex, Heading } from "@chakra-ui/react";
-import AscensionConfiguration from "./sections/AscensionConfiguration";
+import AscensionForm from "./sections/AscensionForm";
 
 const theme = extendTheme({});
 
@@ -17,7 +17,7 @@ const App = () => {
   return (
     <ChakraProvider theme={theme}>
       <Layout />
-      <AscensionConfiguration />
+      <AscensionForm />
     </ChakraProvider>
   );
 };
