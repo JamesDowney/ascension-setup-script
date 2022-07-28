@@ -1,5 +1,20 @@
-import { MoonSign } from "kolmafia";
-import { $class, $item, ascend, Lifestyle, Paths } from "libram";
+import {
+  Ceiling,
+  Desk,
+  Eudora,
+  Garden,
+  MoonSign,
+  Nightstand,
+  Workshed,
+} from "kolmafia";
+import {
+  $class,
+  $item,
+  ascend,
+  Lifestyle,
+  Paths,
+  prepareAscension,
+} from "libram";
 import { useRef } from "react";
 import {
   AlertDialog,
@@ -12,15 +27,11 @@ import {
   Center,
   useDisclosure,
 } from "@chakra-ui/react";
-import { AscensionData } from "./AscensionForm";
+import { AscensionData, PreAscensionData } from "./AscensionForm";
 
 interface Props {
   ascension: AscensionData;
-  // ascensionPrep: {
-  //   workshed: string;
-  //   garden: string;
-  //   eudora: string;
-  // };
+  preAscension: PreAscensionData;
 }
 const lifestyles = new Map<string, Lifestyle>([
   ["Casual", Lifestyle.casual],
@@ -38,9 +49,70 @@ const moonsigns = new Map<string, MoonSign>([
   ["Blender", 8],
   ["Packrat", 9],
 ]);
+const worksheds = new Map<string | undefined, Workshed | undefined>([
+  [undefined, undefined],
+  ["warbear LP-ROM burner", "warbear LP-ROM burner"],
+  ["warbear jackhammer drill press", "warbear jackhammer drill press"],
+  ["warbear induction oven", "warbear induction oven"],
+  ["warbear high-efficiency still", "warbear high-efficiency still"],
+  ["warbear chemistry lab", "warbear chemistry lab"],
+  ["warbear auto-anvil", "warbear auto-anvil"],
+  ["spinning wheel", "spinning wheel"],
+  ["snow machine", "snow machine"],
+  ["Little Geneticist DNA-Splicing Lab", "Little Geneticist DNA-Splicing Lab"],
+  ["portable Mayo Clinic", "portable Mayo Clinic"],
+  ["Asdon Martin keyfob", "Asdon Martin keyfob"],
+  ["diabolic pizza cube", "diabolic pizza cube"],
+  ["cold medicine cabinet", "cold medicine cabinet"],
+]);
+const gardens = new Map<string | undefined, Garden | undefined>([
+  ["packet of pumpkin seeds", "packet of pumpkin seeds"],
+  ["Peppermint Pip Packet", "Peppermint Pip Packet"],
+  ["packet of dragon's teeth", "packet of dragon's teeth"],
+  ["packet of beer seeds", "packet of beer seeds"],
+  ["packet of winter seeds", "packet of winter seeds"],
+  ["packet of thanksgarden seeds", "packet of thanksgarden seeds"],
+  ["packet of tall grass seeds", "packet of tall grass seeds"],
+  ["packet of mushroom spores", "packet of mushroom spores"],
+]);
+const eudorae = new Map<string | undefined, Eudora | undefined>([
+  ["My Own Pen Pal kit", "My Own Pen Pal kit"],
+  [
+    "GameInformPowerDailyPro subscription card",
+    "GameInformPowerDailyPro subscription card",
+  ],
+  ["Xi Receiver Unit", "Xi Receiver Unit"],
+  ["New-You Club Membership Form", "New-You Club Membership Form"],
+  ["Our Daily Candles™ order form", "Our Daily Candles™ order form"],
+]);
+const desks = new Map<string | undefined, Desk | undefined>([
+  ["fancy stationery set", "fancy stationery set"],
+  ["Swiss piggy bank", "Swiss piggy bank"],
+  ["continental juice bar", "continental juice bar"],
+]);
+const ceilings = new Map<string | undefined, Ceiling | undefined>([
+  ["antler chandelier", "antler chandelier"],
+  ["ceiling fan", "ceiling fan"],
+  ["artificial skylight", "artificial skylight"],
+]);
+const nightstands = new Map<string | undefined, Nightstand | undefined>([
+  ["foreign language tapes", "foreign language tapes"],
+  ["bowl of potpourri", "bowl of potpourri"],
+  ["electric muscle stimulator", "electric muscle stimulator"],
+]);
 
-const AscendButton: React.FC<Props> = ({ ascension }) => {
+const AscendButton: React.FC<Props> = ({ ascension, preAscension }) => {
   const ascendButton = () => {
+    prepareAscension({
+      workshed: worksheds.get(preAscension.workshed),
+      garden: gardens.get(preAscension.garden),
+      eudora: eudorae.get(preAscension.eudora),
+      chateau: {
+        desk: desks.get(preAscension.desk),
+        ceiling: ceilings.get(preAscension.ceiling),
+        nightstand: nightstands.get(preAscension.nightstand),
+      },
+    });
     ascend(
       Object.values(Paths).find((path) => path.name === ascension.path)!,
       $class`${ascension.playerClass}`,
